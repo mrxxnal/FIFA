@@ -1,78 +1,64 @@
 window.addEventListener('load', () => {
     const introScreen = document.getElementById('intro-screen');
-    const glitchText = document.getElementById('glitch-text'); // Ensure correct selection
+    const glitchText = document.getElementById('glitch-text'); 
     const subtitle = document.querySelector('.subtitle');
     const video = document.getElementById('intro-video');
     const mainContent = document.getElementById('main-content');
     const cards = document.querySelectorAll('.gallery-image');
 
-    console.log("Script loaded, starting typing effect..."); // Debugging check
+    console.log("🚀 Script loaded, waiting for text animation...");
 
-    // Glitch Overlay Creation (TV Noise Effect)
-    const glitchOverlay = document.createElement('div');
-    glitchOverlay.classList.add('glitch-overlay');
-    document.body.appendChild(glitchOverlay);
+    // **Ensure Video is Fully Hidden Initially**
+    video.style.display = "none";
 
-    // Typing Effect with Random Glitch Flickers
+    // **Typing Effect**
     const words = "A journey through football history...";
     let index = 0;
 
     function typeEffect() {
-        console.log(`Typing index: ${index}`); // Debugging check
-
         if (index < words.length) {
             glitchText.textContent += words[index];
-
-            // Glitch effect - Randomly remove letters for a millisecond
-            if (Math.random() > 0.75) { 
-                let charIndex = glitchText.textContent.length - 1;
-                setTimeout(() => {
-                    let tempText = glitchText.textContent;
-                    glitchText.textContent = tempText.substring(0, charIndex) + "█" + tempText.substring(charIndex + 1);
-                }, 50);
-                setTimeout(() => {
-                    let tempText = glitchText.textContent;
-                    glitchText.textContent = tempText.substring(0, charIndex) + words[index] + tempText.substring(charIndex + 1);
-                }, 100);
-            }
-
             index++;
             setTimeout(typeEffect, 120); // Typing speed
         } else {
-            console.log("Typing complete. Showing subtitle...");
+            console.log("✅ Typing complete. Showing subtitle...");
             setTimeout(() => {
                 subtitle.style.opacity = "1"; // Reveal subtitle after typing
             }, 500);
 
+            // **Start Fading Out & Simultaneously Start Video**
             setTimeout(() => {
-                console.log("Fading out intro screen...");
-                introScreen.classList.add('fade-out');
-            }, 2500);
-
-            setTimeout(() => {
-                console.log("Hiding intro screen and starting video...");
-                introScreen.style.display = 'none';
+                console.log("🎬 Starting video slightly earlier...");
+                video.style.display = "block";
+                video.currentTime = 0;
                 video.play();
-            }, 4500);
+            }, 700); // Starts ~300ms earlier
+            
+            setTimeout(() => {
+                console.log("📉 Fading out intro screen and starting video...");
+                introScreen.classList.add('fade-out');
+            }, 1000);
+            
+            setTimeout(() => {
+                introScreen.style.display = 'none';
+            }, 2000);
         }
     }
 
-    // Start typing effect
+    // **Start Typing Effect**
     typeEffect();
 
-    // Force video playback
-    video.play().catch(() => {
-        video.muted = true;
-        video.play();
-    });
-
-    // When video ends, apply glitch effect before transitioning
+    // **Glitch Effect When Video Ends**
     video.onended = () => {
-        console.log("Video ended, starting glitch transition...");
+        console.log("📼 Video ended, starting glitch transition...");
         video.classList.add('fade-out');
 
         // **5-8 Fast Randomized Glitch Bars**
         const glitchCount = Math.floor(Math.random() * 4) + 5;
+        const glitchOverlay = document.createElement('div');
+        glitchOverlay.classList.add('glitch-overlay');
+        document.body.appendChild(glitchOverlay);
+
         for (let i = 0; i < glitchCount; i++) {
             let bar = document.createElement('div');
             bar.classList.add('glitch-bar');
@@ -90,14 +76,14 @@ window.addEventListener('load', () => {
         }, 10); // Instant start of glitch
 
         setTimeout(() => {
-            console.log("Removing glitch effect and showing main content...");
+            console.log("✨ Removing glitches and showing main content...");
             glitchOverlay.classList.remove('glitch-active');
             glitchOverlay.style.display = 'none';
             mainContent.classList.remove('hidden');
             mainContent.classList.add('visible');
             video.style.display = 'none';
 
-            // **Staggered Card Reveal (100ms Delay Between Each Card)**
+            // **Cards Appear One by One**
             setTimeout(() => {
                 cards.forEach((card, index) => {
                     setTimeout(() => {
@@ -105,6 +91,6 @@ window.addEventListener('load', () => {
                     }, index * 100);
                 });
             }, 400);
-        }, 250); // **Extreme rapid glitch transition**
+        }, 250);
     };
 });
