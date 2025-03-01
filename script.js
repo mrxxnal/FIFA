@@ -3,45 +3,55 @@ window.addEventListener('load', () => {
     const mainContent = document.getElementById('main-content');
     const cards = document.querySelectorAll('.gallery-image');
 
-    // Create Glitch Overlay Element
+    // Create Glitch Overlay
     const glitchOverlay = document.createElement('div');
     glitchOverlay.classList.add('glitch-overlay');
     document.body.appendChild(glitchOverlay);
 
+    // Generate 7-12 random glitch bars with varied properties
+    const glitchCount = Math.floor(Math.random() * 6) + 7; // Between 7 and 12 bars
+    for (let i = 0; i < glitchCount; i++) {
+        let bar = document.createElement('div');
+        bar.classList.add('glitch-bar');
+        bar.style.top = `${Math.random() * 100}%`; // Random vertical position
+        bar.style.height = `${Math.random() * 15 + 1}px`; // Mix of very thin and thick bars
+        bar.style.animationDuration = `${Math.random() * 0.05 + 0.02}s`; // Fast, unpredictable speeds
+        bar.style.background = `rgba(${Math.floor(Math.random() * 255)}, 
+                                     ${Math.floor(Math.random() * 255)}, 
+                                     ${Math.floor(Math.random() * 255)}, 0.9)`;
+        glitchOverlay.appendChild(bar);
+    }
+
     // Force video playback
-    video.play().catch((error) => {
-        console.log('Autoplay failed. Muting and retrying...');
+    video.play().catch(() => {
         video.muted = true;
         video.play();
     });
 
-    // When the video ends, trigger the glitch effect before transitioning
+    // When video ends, trigger the glitch effect before transitioning
     video.onended = () => {
-        // Fade out video smoothly
         video.classList.add('fade-out');
 
-        // Show glitch effect
         setTimeout(() => {
-            glitchOverlay.style.display = 'block'; // Show the glitch overlay
-        }, 500); // Delay before glitch starts
+            glitchOverlay.classList.add('glitch-active');
+        }, 20); // Almost instant start
 
-        // Remove glitch effect and show main content
         setTimeout(() => {
-            glitchOverlay.style.display = 'none'; // Hide glitch overlay
+            glitchOverlay.classList.remove('glitch-active');
+            glitchOverlay.style.display = 'none';
             mainContent.classList.remove('hidden');
             mainContent.classList.add('visible');
-            video.style.display = 'none'; // Hide the video after fade-out
+            video.style.display = 'none';
 
-            // Add animation to cards after 3-second delay
             setTimeout(() => {
                 cards.forEach((card, index) => {
                     setTimeout(() => {
                         card.classList.add('card-animated');
-                    }, index * 300); // Staggering the animation of cards
+                    }, index * 100);
                 });
-            }, 800); // Delay after main content is visible
+            }, 400);
 
-        }, 1500); // Total glitch duration before transition
+        }, 300); // Shorter but extreme glitch effect
     };
 });
 

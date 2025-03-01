@@ -7,13 +7,26 @@ body, html {
     overflow-x: hidden;
     scroll-behavior: smooth;
     background-color: black; /* Fallback color */
-    background-image: url('assets/fifa_background.jpeg');
-    background-size: contain; /* Ensure the full image is visible */
+    background-image: url('assets/fifa_red.jpeg');
+    background-size: cover; /* Ensures full-screen coverage without stretching */
     background-repeat: no-repeat; /* Prevent image repetition */
-    background-position: center; /* Center the image */
-    background-attachment: fixed; /* Keep the image fixed during scroll */
+    background-position: center; /* Centers the image */
+    background-attachment: fixed; /* Keeps it fixed while scrolling */
     color: white;
     transition: background 2s ease; /* Smooth transition to the background image */
+}
+
+/* Apply Blur Effect to Background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(10px); /* Increased blur for a smoother effect */
+    z-index: -1;
 }
 
 /* Fullscreen Video */
@@ -28,7 +41,7 @@ body, html {
     transition: opacity 2s ease; /* Smooth transition for fade-out */
 }
 
-/* Glitch Effect Wrapper */
+/* Glitch Overlay */
 .glitch-overlay {
     position: fixed;
     top: 0;
@@ -36,42 +49,48 @@ body, html {
     width: 100%;
     height: 100%;
     background: black;
-    z-index: 9999; /* Make sure it’s on top */
-    display: none; /* Hidden until triggered */
+    z-index: 9999;
+    display: none;
+    mix-blend-mode: screen;
+    pointer-events: none;
     overflow: hidden;
-    animation: glitch-effect 0.8s steps(10) forwards;
 }
 
-/* Glitch Animation Keyframes */
-@keyframes glitch-effect {
-    0% {
-        background: url('assets/fifa_background.jpeg') center/cover no-repeat;
-        filter: brightness(150%) contrast(200%) hue-rotate(30deg);
-        clip-path: inset(10% 0 30% 0);
-        transform: scale(1.1);
-    }
-    20% {
-        filter: brightness(180%) contrast(250%) hue-rotate(-30deg);
-        clip-path: inset(40% 0 20% 0);
-    }
-    40% {
-        filter: brightness(120%) contrast(220%) hue-rotate(45deg);
-        clip-path: inset(5% 0 50% 0);
-    }
-    60% {
-        filter: brightness(200%) contrast(300%) hue-rotate(-45deg);
-        clip-path: inset(30% 0 10% 0);
-        transform: scale(1);
-    }
-    80% {
-        filter: brightness(90%) contrast(180%);
-        clip-path: inset(10% 0 30% 0);
-    }
-    100% {
-        filter: none;
-        clip-path: none;
-        transform: none;
-    }
+/* Glitch Bars - Irregular Thickness & Angles */
+.glitch-bar {
+    position: absolute;
+    width: 120%;
+    height: calc(1px + 5vw); /* Dynamic thickness, varied per frame */
+    background: rgba(255, 0, 0, 0.8);
+    left: -150%;
+    transform: rotate(calc(-5deg + 10deg * random())); /* Random rotation */
+    animation: glitchBarMove 0.03s linear infinite;
+}
+
+/* Glitch Bars Move at Random Speeds & Angles */
+@keyframes glitchBarMove {
+    0% { left: -150%; }
+    100% { left: 150%; }
+}
+
+/* Extreme Randomized Color Flickering */
+.glitch-active {
+    display: block;
+    animation: glitchFlash 0.02s infinite alternate;
+}
+
+@keyframes glitchFlash {
+    0%   { background: rgba(255, 0, 0, 0.7); transform: skewX(5deg); }
+    10%  { background: rgba(0, 255, 0, 0.7); transform: skewX(-5deg); }
+    20%  { background: rgba(0, 0, 255, 0.7); transform: skewX(7deg); }
+    30%  { background: rgba(255, 255, 0, 0.7); transform: skewX(-3deg); }
+    40%  { background: rgba(255, 0, 255, 0.7); transform: skewX(8deg); }
+    50%  { background: rgba(0, 255, 255, 0.7); transform: skewX(-6deg); }
+    60%  { background: rgba(255, 255, 255, 0.7); transform: skewX(4deg); }
+    70%  { background: rgba(0, 0, 0, 0.7); transform: skewX(-4deg); }
+    80%  { background: rgba(255, 100, 0, 0.7); transform: skewX(10deg); }
+    90%  { background: rgba(50, 255, 50, 0.7); transform: skewX(-10deg); }
+    100% { background: rgba(255, 255, 255, 0.7); transform: skewX(5deg); }
 }
 
 /* Hide Video and Show Background Smoothly */
