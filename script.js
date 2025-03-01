@@ -3,6 +3,11 @@ window.addEventListener('load', () => {
     const mainContent = document.getElementById('main-content');
     const cards = document.querySelectorAll('.gallery-image');
 
+    // Create Glitch Overlay Element
+    const glitchOverlay = document.createElement('div');
+    glitchOverlay.classList.add('glitch-overlay');
+    document.body.appendChild(glitchOverlay);
+
     // Force video playback
     video.play().catch((error) => {
         console.log('Autoplay failed. Muting and retrying...');
@@ -10,27 +15,33 @@ window.addEventListener('load', () => {
         video.play();
     });
 
-    // When the video ends, transition smoothly to black background
+    // When the video ends, trigger the glitch effect before transitioning
     video.onended = () => {
-        // Fade out the video with animation
+        // Fade out video smoothly
         video.classList.add('fade-out');
 
-        // Show the main content with a delay
+        // Show glitch effect
         setTimeout(() => {
+            glitchOverlay.style.display = 'block'; // Show the glitch overlay
+        }, 500); // Delay before glitch starts
+
+        // Remove glitch effect and show main content
+        setTimeout(() => {
+            glitchOverlay.style.display = 'none'; // Hide glitch overlay
             mainContent.classList.remove('hidden');
             mainContent.classList.add('visible');
             video.style.display = 'none'; // Hide the video after fade-out
 
-            // Add animation to cards after a 3-second delay
+            // Add animation to cards after 3-second delay
             setTimeout(() => {
                 cards.forEach((card, index) => {
                     setTimeout(() => {
                         card.classList.add('card-animated');
                     }, index * 300); // Staggering the animation of cards
                 });
-            }, 800); // 3-second delay after main content is visible
+            }, 800); // Delay after main content is visible
 
-        }, 2000); // Duration of the fade-out animation
+        }, 1500); // Total glitch duration before transition
     };
 });
 

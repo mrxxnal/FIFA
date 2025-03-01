@@ -28,9 +28,57 @@ body, html {
     transition: opacity 2s ease; /* Smooth transition for fade-out */
 }
 
-/* Fade-Out Effect for Video */
+/* Glitch Effect Wrapper */
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 9999; /* Make sure it’s on top */
+    display: none; /* Hidden until triggered */
+    overflow: hidden;
+    animation: glitch-effect 0.8s steps(10) forwards;
+}
+
+/* Glitch Animation Keyframes */
+@keyframes glitch-effect {
+    0% {
+        background: url('assets/fifa_background.jpeg') center/cover no-repeat;
+        filter: brightness(150%) contrast(200%) hue-rotate(30deg);
+        clip-path: inset(10% 0 30% 0);
+        transform: scale(1.1);
+    }
+    20% {
+        filter: brightness(180%) contrast(250%) hue-rotate(-30deg);
+        clip-path: inset(40% 0 20% 0);
+    }
+    40% {
+        filter: brightness(120%) contrast(220%) hue-rotate(45deg);
+        clip-path: inset(5% 0 50% 0);
+    }
+    60% {
+        filter: brightness(200%) contrast(300%) hue-rotate(-45deg);
+        clip-path: inset(30% 0 10% 0);
+        transform: scale(1);
+    }
+    80% {
+        filter: brightness(90%) contrast(180%);
+        clip-path: inset(10% 0 30% 0);
+    }
+    100% {
+        filter: none;
+        clip-path: none;
+        transform: none;
+    }
+}
+
+/* Hide Video and Show Background Smoothly */
 .fade-out {
     opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 /* Initially Hide All Content */
