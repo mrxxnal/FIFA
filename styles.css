@@ -1,3 +1,82 @@
+/* Fullscreen Black Background */
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    color: #8A0707; /* Deep Blood Red */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    z-index: 10000;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Typing Effect */
+.typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1.5rem; /* Subtle, eerie text */
+    font-weight: 400;
+    display: inline-block;
+    text-transform: none; /* No all caps */
+}
+
+/* Glitch Flickering */
+.typing-text::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 1rem;
+    background-color: #8A0707;
+    animation: blink 0.7s infinite;
+}
+
+/* Blinking Cursor */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* TV Screen Noise Effect */
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        rgba(0, 0, 0, 0.1),
+        rgba(255, 255, 255, 0.1) 1px,
+        transparent 2px
+    );
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    animation: vhs-noise 0.2s infinite;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Static Noise Movement */
+@keyframes vhs-noise {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-2px); }
+}
+
+/* Fade-out Animation for Intro */
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
 /* Basic Styles */
 body, html {
     margin: 0;
