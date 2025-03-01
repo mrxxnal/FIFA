@@ -8,8 +8,10 @@ body, html {
     scroll-behavior: smooth;
     background-color: black; /* Fallback color */
     background-image: url('assets/fifa_background.jpeg');
-    background-size: cover;
-    background-position: center;
+    background-size: contain; /* Ensure the full image is visible */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-position: center; /* Center the image */
+    background-attachment: fixed; /* Keep the image fixed during scroll */
     color: white;
     transition: background 2s ease; /* Smooth transition to the background image */
 }
