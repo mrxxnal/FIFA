@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Fullscreen Video Background -->
+    <video autoplay muted playsinline class="background-video" id="intro-video">
+        <source src="assets/fifa.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Hidden Content Until Video Ends -->
+    <div class="content-wrapper hidden" id="main-content">
+        <!-- Hamburger Menu Icon -->
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="data-analysis.html" class="nav-link">Data Analysis</a>
+            <a href="about-me.html" class="nav-link">About Me</a>
+        </nav>
+
+        <!-- Image Gallery -->
+        <div class="image-gallery">
+            <img src="assets/messi.png" alt="Messi" class="gallery-image">
+            <img src="assets/ronaldo.png" alt="Ronaldo" class="gallery-image">
+            <img src="assets/mbappe.png" alt="Mbappe" class="gallery-image">
+            <img src="assets/debruyne.png" alt="De Bruyne" class="gallery-image">
+            <img src="assets/haaland.png" alt="Haaland" class="gallery-image">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
