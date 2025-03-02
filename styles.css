@@ -51,8 +51,9 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
     z-index: 1000;
+    opacity: 0;
     display: none; /* Initially hidden */
 }
 
@@ -73,21 +74,17 @@
     transform: scale(0.95);
 }
 
-/* Content Wrapper (Wider & Enhanced Glow) */
+/* Content Wrapper (High Opacity) */
 .content-wrapper {
     position: relative;
-    background: rgba(20, 20, 20, 0.92); /* Slightly more opacity */
+    background: rgba(20, 20, 20, 0.9); /* Dark Theme with High Opacity */
     border-radius: 15px;
-    padding: 3rem;
+    padding: 2rem;
     margin: auto;
-    width: 95%; /* Increased width */
-    max-width: 1400px; /* Wider maximum */
-    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); /* Stronger FIFA red glow */
-    text-align: left; /* Align text to left */
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    width: 85%;
+    max-width: 1200px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* Subtle FIFA Glow */
+    text-align: left;
 }
 
 /* FIFA Legends Heading */
@@ -142,12 +139,6 @@
     opacity: 1;
     transform: translateY(0);
     transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-/* Subtle FIFA Hover Effect */
-.gallery-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
 }
 
 /* Content Section Styles */
@@ -298,71 +289,39 @@ body::before {
     opacity: 1;
     transition: opacity 2s ease, visibility 2s;
 }
-
-/* Hamburger Menu Icon */
-.hamburger {
-    position: fixed;
-    top: 1rem;
-    right: 1.5rem;
-    z-index: 10;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-}
-
-.hamburger div {
-    width: 100%;
-    height: 4px;
-    background-color: white;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-/* Hamburger Animation */
-.hamburger.active div:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger.active div:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active div:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
 /* Navigation Bar */
 .navbar {
     position: fixed;
     top: 0;
-    right: 0;
-    height: 100vh;
-    width: 200px;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 9;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    left: 0;
+    width: 100%;
+    background-color: rgba(30, 30, 30, 0.98); /* Dark, High Opacity */
+    box-shadow: 0 3px 10px rgba(255, 0, 0, 0.5); /* Subtle Red Glow */
+    padding: 0.6rem 0; /* Reduced Height */
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    gap: 1.5rem;
+    z-index: 1000;
 }
 
-.navbar.active {
-    transform: translateX(0);
-}
-
+/* Navigation Links */
 .nav-link {
-    color: white;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
     text-decoration: none;
-    font-size: 1.5rem;
-    margin: 1rem 0;
-    transition: color 0.3s;
+    padding: 0.4rem 1rem;
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
 
+/* Hover Effect - Red Glow */
 .nav-link:hover {
-    color: #ffd700;
+    color: #ff4444; /* Bright Red */
+    text-shadow: 0px 0px 8px rgba(255, 68, 68, 0.8); /* Red Glow */
+}
+
+/* Active Page Indicator */
+.nav-link.active {
+    color: #ff4444;
+    text-shadow: 0px 0px 10px rgba(255, 68, 68, 1);
 }
