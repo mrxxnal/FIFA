@@ -5,7 +5,11 @@ window.addEventListener('load', async () => {
     const cards = document.querySelectorAll('.gallery-image');
     const audio = document.getElementById("background-audio");
     const audioToggle = document.getElementById("audio-toggle");
-    const emberContainer = document.getElementById("embers-container");
+    
+    // **Create a Container for Embers Dynamically**
+    let emberContainer = document.createElement('div');
+    emberContainer.id = "embers-container";
+    document.body.appendChild(emberContainer);
 
     console.log("🚀 Script loaded, checking if video should play...");
 
@@ -13,13 +17,14 @@ window.addEventListener('load', async () => {
     const hasPlayed = localStorage.getItem("videoPlayed");
 
     if (!hasPlayed) {
-        console.log("🎬 Playing video since it's the first visit...");
+        console.log("🎬 First visit detected, playing video...");
 
-        video.style.display = "block"; 
+        video.style.display = "block";
         video.currentTime = 0;
         video.play();
         playAudio();
 
+        // **Mark Video as Played**
         localStorage.setItem("videoPlayed", "true");
 
         setTimeout(() => { introScreen.classList.add('fade-out'); }, 1000);
@@ -28,29 +33,25 @@ window.addEventListener('load', async () => {
         video.addEventListener("ended", () => {
             console.log("📼 Video ended, showing main content...");
             video.classList.add('fade-out');
-            mainContent.classList.remove('hidden');
-            mainContent.classList.add('visible');
             video.style.display = 'none';
-
-            createEmbers(); // **Start Embers**
-            startEmberSpawn(); // **Continuously Spawn More Embers**
-            
-            setTimeout(() => {
-                cards.forEach((card, index) => {
-                    setTimeout(() => { card.classList.add('card-animated'); }, index * 100);
-                });
-            }, 400);
+            showMainContent();
         });
     } else {
         console.log("⏩ Skipping video, showing main content instantly...");
         introScreen.style.display = 'none';
         video.style.display = 'none';
+        showMainContent();
+    }
+
+    // **Show Main Content + Start Embers**
+    function showMainContent() {
         mainContent.classList.remove('hidden');
         mainContent.classList.add('visible');
 
         createEmbers(); // **Start Embers**
         startEmberSpawn(); // **Continuously Spawn More Embers**
 
+        // **Cards Appear One by One**
         setTimeout(() => {
             cards.forEach((card, index) => {
                 setTimeout(() => { card.classList.add('card-animated'); }, index * 100);
@@ -101,8 +102,8 @@ window.addEventListener('load', async () => {
     function createEmbers() {
         if (!emberContainer) return;
 
-        // Create 50 initial embers
-        for (let i = 0; i < 50; i++) {
+        // Create 30 initial embers
+        for (let i = 0; i < 30; i++) {
             spawnEmber();
         }
     }
@@ -111,21 +112,22 @@ window.addEventListener('load', async () => {
     function startEmberSpawn() {
         setInterval(() => {
             spawnEmber();
-        }, 500); // Every 0.5 seconds, a new ember appears
+        }, 300); // Every 0.3 seconds, a new ember appears
     }
 
     function spawnEmber() {
         let ember = document.createElement("div");
         ember.classList.add("ember");
 
-        ember.style.left = `${Math.random() * 100}vw`;
-        ember.style.animationDuration = `${2 + Math.random() * 3}s`;
-        ember.style.width = `${3 + Math.random() * 7}px`; 
+        ember.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        ember.style.animationDuration = `${3 + Math.random() * 4}s`; // Random speed
+        ember.style.width = `${2 + Math.random() * 6}px`; // Random size
         ember.style.height = ember.style.width;
-        ember.style.animationDelay = `${Math.random() * 3}s`;
+        ember.style.animationDelay = `${Math.random() * 2}s`; // Random delay
 
         emberContainer.appendChild(ember);
 
+        // Remove ember after animation
         setTimeout(() => {
             ember.remove();
         }, 5000);
