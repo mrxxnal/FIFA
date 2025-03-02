@@ -72,8 +72,18 @@ window.addEventListener('load', async () => {
         try {
             audio.currentTime = 0;
             audio.volume = 0.8;
-            await audio.play();
-            console.log("🎵 Audio started successfully!");
+
+            // **Check if User Muted the Audio Before**
+            const isMuted = localStorage.getItem("audioMuted");
+            if (isMuted === "true") {
+                audio.muted = true;
+                audioToggle.innerHTML = "🔇";
+            } else {
+                audio.muted = false;
+                audioToggle.innerHTML = "🔊";
+                await audio.play();
+                console.log("🎵 Audio started successfully!");
+            }
         } catch (err) {
             console.warn("🔇 Autoplay blocked. Waiting for user interaction...");
             document.body.addEventListener('click', () => {
@@ -83,4 +93,17 @@ window.addEventListener('load', async () => {
             }, { once: true });
         }
     }
+
+    // **Audio Toggle Button (Mutes & Unmutes Audio)**
+    audioToggle.addEventListener("click", () => {
+        if (audio.muted) {
+            audio.muted = false;
+            localStorage.setItem("audioMuted", "false");
+            audioToggle.innerHTML = "🔊"; // Change icon to unmute
+        } else {
+            audio.muted = true;
+            localStorage.setItem("audioMuted", "true");
+            audioToggle.innerHTML = "🔇"; // Change icon to mute
+        }
+    });
 });
