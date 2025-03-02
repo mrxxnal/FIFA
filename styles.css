@@ -19,6 +19,146 @@
     overflow: hidden;
 }
 
+#audio-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1); /* Glass effect */
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 10000;
+}
+
+/* Skip Button Styling */
+.skip-btn {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    display: none; /* Initially hidden */
+}
+
+.skip-btn:hover {
+    background: rgba(255, 0, 0, 1);
+    transform: scale(1.1);
+}
+
+/* Subtle hover effect */
+#audio-toggle:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: scale(1.1);
+    border-color: rgba(255, 0, 0, 0.5);
+}
+
+/* Click effect */
+#audio-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Content Wrapper (Wider & Enhanced Glow) */
+.content-wrapper {
+    position: relative;
+    background: rgba(20, 20, 20, 0.92); /* Slightly more opacity */
+    border-radius: 15px;
+    padding: 3rem;
+    margin: auto;
+    width: 95%; /* Increased width */
+    max-width: 1400px; /* Wider maximum */
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); /* Stronger FIFA red glow */
+    text-align: left; /* Align text to left */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* FIFA Legends Heading */
+.fifa-heading {
+    text-align: left; /* Align heading to match left-aligned cards */
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+}
+
+.fifa-heading h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FFD700; /* Gold FIFA Theme */
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    animation: flicker 1.5s infinite alternate;
+}
+
+.fifa-heading p {
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.85;
+}
+
+/* Flicker Effect for Heading */
+@keyframes flicker {
+    0% { opacity: 1; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+    100% { opacity: 0.8; text-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+}
+
+/* FIFA-Themed Stacked Cards */
+.image-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Player Cards */
+.gallery-image {
+    width: 400px;
+    height: auto;
+    margin: 2.5rem 0; /* More spacing between cards */
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out, opacity 0.5s;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* Animated Appearance of Cards */
+.card-animated {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Subtle FIFA Hover Effect */
+.gallery-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+
+/* Content Section Styles */
+section {
+    padding: 5rem 2rem;
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
 /* Typing Effect */
 .typing-text {
     overflow: hidden;
@@ -51,7 +191,7 @@ body, html {
     overflow-x: hidden;
     scroll-behavior: smooth;
     background-color: black; /* Fallback color */
-    background-image: url('assets/fifa_red.jpg');
+    background-image: url('assets/redclouds.jpg');
     background-size: cover; /* Ensures full-screen coverage without stretching */
     background-repeat: no-repeat; /* Prevent image repetition */
     background-position: center; /* Centers the image */
@@ -225,42 +365,4 @@ body::before {
 
 .nav-link:hover {
     color: #ffd700;
-}
-
-/* Image Gallery on the Left */
-.image-gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 5rem;
-    padding-left: 10rem;
-    position: relative;
-    z-index: 1;
-}
-
-/* Cards Animation */
-.gallery-image {
-    width: 350px; /* Increased card size */
-    height: auto;
-    margin: 2.5rem 0; /* More spacing between cards */
-    border-radius: 10px;
-    transition: transform 0.5s, opacity 0.5s;
-    opacity: 0;
-    transform: translateY(50px);
-}
-
-/* Animated Appearance of Cards */
-.card-animated {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-/* Content Section Styles */
-section {
-    padding: 5rem 2rem;
-    color: white;
-    text-align: center;
-    position: relative;
-    z-index: 1;
 }
