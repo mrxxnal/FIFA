@@ -39,29 +39,6 @@
     z-index: 10000;
 }
 
-/* Skip Button Styling */
-.skip-btn {
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    background: rgba(255, 0, 0, 0.8);
-    color: white;
-    font-size: 1rem;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
-    z-index: 1000;
-    opacity: 0;
-    display: none; /* Initially hidden */
-}
-
-.skip-btn:hover {
-    background: rgba(255, 0, 0, 1);
-    transform: scale(1.1);
-}
-
 /* Subtle hover effect */
 #audio-toggle:hover {
     background: rgba(255, 0, 0, 0.2);
@@ -85,27 +62,6 @@
     max-width: 1200px;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* Subtle FIFA Glow */
     text-align: left;
-}
-
-/* FIFA Legends Heading */
-.fifa-heading {
-    text-align: left; /* Align heading to match left-aligned cards */
-    margin-bottom: 2rem;
-    padding-left: 2rem;
-}
-
-.fifa-heading h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #FFD700; /* Gold FIFA Theme */
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    animation: flicker 1.5s infinite alternate;
-}
-
-.fifa-heading p {
-    font-size: 1.2rem;
-    color: #fff;
-    opacity: 0.85;
 }
 
 /* Flicker Effect for Heading */
@@ -295,7 +251,7 @@ body::before {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(30, 30, 30, 0.98); /* Dark, High Opacity */
+    background-color: rgba(30, 30, 30, 0.8); /* Dark, High Opacity */
     box-shadow: 0 3px 10px rgba(255, 0, 0, 0.5); /* Subtle Red Glow */
     padding: 0.6rem 0; /* Reduced Height */
     display: flex;
