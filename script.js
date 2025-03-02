@@ -1,15 +1,48 @@
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     const introScreen = document.getElementById('intro-screen');
-    const glitchText = document.getElementById('glitch-text'); 
+    const glitchText = document.getElementById('glitch-text');
     const subtitle = document.querySelector('.subtitle');
     const video = document.getElementById('intro-video');
     const mainContent = document.getElementById('main-content');
     const cards = document.querySelectorAll('.gallery-image');
+    const audio = document.getElementById("background-audio");
 
     console.log("🚀 Script loaded, waiting for text animation...");
 
-    // **Ensure Video is Fully Hidden Initially**
+    // **Ensure the video is hidden initially**
     video.style.display = "none";
+
+    // **Attempt to Autoplay Audio**
+    async function playAudio() {
+        try {
+            audio.volume = 0.8; // Set initial volume
+            await audio.play();
+            console.log("🎵 Audio started successfully!");
+        } catch (err) {
+            console.warn("🔇 Autoplay blocked. Waiting for user interaction...");
+            document.body.addEventListener('click', () => {
+                audio.play();
+                console.log("🎵 Audio started after user interaction!");
+            }, { once: true });
+        }
+    }
+
+    playAudio(); // Call audio function on load
+
+    // **Smooth Fade-Out for Audio**
+    audio.addEventListener("timeupdate", () => {
+        let remaining = audio.duration - audio.currentTime;
+        if (remaining <= 3) { // Last 3 seconds
+            audio.volume = Math.max(0, remaining / 3);
+        }
+    });
+
+    // **Ensure Audio Stops at End**
+    audio.addEventListener("ended", () => {
+        audio.pause();
+        audio.currentTime = 0;
+        console.log("🔇 Audio playback ended.");
+    });
 
     // **Typing Effect**
     const words = "A journey through football history...";
@@ -26,16 +59,16 @@ window.addEventListener('load', () => {
                 subtitle.style.opacity = "1"; // Reveal subtitle after typing
             }, 500);
 
-            // **Start Fading Out & Simultaneously Start Video**
+            // **Start Video Playback While Text Fades Out**
             setTimeout(() => {
                 console.log("🎬 Starting video slightly earlier...");
                 video.style.display = "block";
                 video.currentTime = 0;
                 video.play();
-            }, 700); // Starts ~300ms earlier
+            }, 500);
             
             setTimeout(() => {
-                console.log("📉 Fading out intro screen and starting video...");
+                console.log("📉 Fading out intro screen...");
                 introScreen.classList.add('fade-out');
             }, 1000);
             

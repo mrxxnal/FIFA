@@ -8,6 +8,9 @@
 </head>
 <body>
 
+    <!-- Hidden Audio for Background Music -->
+    <audio id="background-audio" src="assets/devilswork.mp3" preload="auto"></audio>
+
     <!-- Typing Intro Screen -->
     <div class="intro-screen" id="intro-screen">
         <h1 class="typing-text"><span id="glitch-text"></span></h1>
@@ -17,7 +20,7 @@
     <div class="glitch-overlay"></div>
 
     <!-- Fullscreen Video Background -->
-    <video autoplay muted playsinline class="background-video" id="intro-video">
+    <video muted playsinline class="background-video" id="intro-video">
         <source src="assets/fifa.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -51,5 +54,6 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
