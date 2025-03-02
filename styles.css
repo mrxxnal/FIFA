@@ -1,4 +1,45 @@
-/* Fullscreen Black Background */
+/* ===============================
+   🌟 GLOBAL STYLES & RESET
+   =============================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===============================
+   🎨 GENERAL BODY STYLES
+   =============================== */
+body, html {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-color: black; /* Fallback color */
+    background-image: url('assets/redclouds.jpg');
+    background-size: cover; /* Ensures full-screen coverage */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    transition: background 2s ease; /* Smooth transition */
+}
+
+/* 🟢 Background Blur Effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* ===============================
+   🔥 INTRO SCREEN (Fullscreen)
+   =============================== */
 #intro-screen {
     position: fixed;
     top: 0;
@@ -6,7 +47,7 @@
     width: 100%;
     height: 100%;
     background: black;
-    color: #ffffff; /* Deep Blood Red */
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,13 +60,43 @@
     overflow: hidden;
 }
 
+/* Fade-out Animation for Intro */
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s ease-out;
+}
+
+/* ===============================
+   🎥 FULLSCREEN VIDEO
+   =============================== */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1000;
+    transition: opacity 2s ease; /* Smooth transition for fade-out */
+}
+
+/* Hide Video and Show Background Smoothly */
+.fade-out {
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* ===============================
+   🎵 AUDIO TOGGLE BUTTON
+   =============================== */
 #audio-toggle {
     position: fixed;
     top: 20px;
     left: 20px;
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.1); /* Glass effect */
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
@@ -39,221 +110,28 @@
     z-index: 10000;
 }
 
-/* Subtle hover effect */
+/* Hover & Click Effects */
 #audio-toggle:hover {
     background: rgba(255, 0, 0, 0.2);
     transform: scale(1.1);
     border-color: rgba(255, 0, 0, 0.5);
 }
 
-/* Click effect */
 #audio-toggle:active {
     transform: scale(0.95);
 }
 
-/* Content Wrapper (High Opacity) */
-.content-wrapper {
-    position: relative;
-    background: rgba(20, 20, 20, 0.9); /* Dark Theme with High Opacity */
-    border-radius: 15px;
-    padding: 2rem;
-    margin: auto;
-    width: 85%;
-    max-width: 1200px;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* Subtle FIFA Glow */
-    text-align: left;
-}
-
-/* Flicker Effect for Heading */
-@keyframes flicker {
-    0% { opacity: 1; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
-    100% { opacity: 0.8; text-shadow: 0 0 30px rgba(255, 215, 0, 1); }
-}
-
-/* FIFA-Themed Stacked Cards */
-.image-gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-/* Player Cards */
-.gallery-image {
-    width: 400px;
-    height: auto;
-    margin: 2.5rem 0; /* More spacing between cards */
-    border-radius: 10px;
-    transition: transform 0.5s ease-in-out, opacity 0.5s;
-    opacity: 0;
-    transform: translateY(50px);
-}
-
-/* Animated Appearance of Cards */
-.card-animated {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-/* Content Section Styles */
-section {
-    padding: 5rem 2rem;
-    color: white;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-/* Typing Effect */
-.typing-text {
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 1.5rem; /* Subtle, eerie text */
-    font-weight: 400;
-    display: inline-block;
-    text-transform: none; /* No all caps */
-}
-
-/* Blinking Cursor */
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
-
-/* Fade-out Animation for Intro */
-.fade-out {
-    opacity: 0;
-    transition: opacity 2s ease-out;
-}
-
-/* Basic Styles */
-body, html {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    background-color: black; /* Fallback color */
-    background-image: url('assets/redclouds.jpg');
-    background-size: cover; /* Ensures full-screen coverage without stretching */
-    background-repeat: no-repeat; /* Prevent image repetition */
-    background-position: center; /* Centers the image */
-    background-attachment: fixed; /* Keeps it fixed while scrolling */
-    color: white;
-    transition: background 2s ease; /* Smooth transition to the background image */
-}
-
-
-/* Apply Blur Effect to Background */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    filter: blur(10px); /* Increased blur for a smoother effect */
-    z-index: -1;
-}
-
-/* Fullscreen Video */
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1000; /* Keep video on top */
-    transition: opacity 2s ease; /* Smooth transition for fade-out */
-}
-
-/* Glitch Overlay */
-.glitch-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    z-index: 9999;
-    display: none;
-    mix-blend-mode: screen;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-/* Glitch Bars - Irregular Thickness & Angles */
-.glitch-bar {
-    position: absolute;
-    width: 120%;
-    height: calc(1px + 5vw); /* Dynamic thickness, varied per frame */
-    background: rgba(255, 0, 0, 0.8);
-    left: -150%;
-    transform: rotate(calc(-5deg + 10deg * random())); /* Random rotation */
-    animation: glitchBarMove 0.03s linear infinite;
-}
-
-/* Glitch Bars Move at Random Speeds & Angles */
-@keyframes glitchBarMove {
-    0% { left: -150%; }
-    100% { left: 150%; }
-}
-
-/* Extreme Randomized Color Flickering */
-.glitch-active {
-    display: block;
-    animation: glitchFlash 0.02s infinite alternate;
-}
-
-@keyframes glitchFlash {
-    0%   { background: rgba(255, 0, 0, 0.7); transform: skewX(5deg); }
-    10%  { background: rgba(0, 255, 0, 0.7); transform: skewX(-5deg); }
-    20%  { background: rgba(0, 0, 255, 0.7); transform: skewX(7deg); }
-    30%  { background: rgba(255, 255, 0, 0.7); transform: skewX(-3deg); }
-    40%  { background: rgba(255, 0, 255, 0.7); transform: skewX(8deg); }
-    50%  { background: rgba(0, 255, 255, 0.7); transform: skewX(-6deg); }
-    60%  { background: rgba(255, 255, 255, 0.7); transform: skewX(4deg); }
-    70%  { background: rgba(0, 0, 0, 0.7); transform: skewX(-4deg); }
-    80%  { background: rgba(255, 100, 0, 0.7); transform: skewX(10deg); }
-    90%  { background: rgba(50, 255, 50, 0.7); transform: skewX(-10deg); }
-    100% { background: rgba(255, 255, 255, 0.7); transform: skewX(5deg); }
-}
-
-/* Hide Video and Show Background Smoothly */
-.fade-out {
-    opacity: 0;
-    transform: scale(1.1);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-/* Initially Hide All Content */
-.hidden {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 2s ease, visibility 2s;
-}
-
-/* Show Content with Fade-in */
-.visible {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 2s ease, visibility 2s;
-}
-/* Navigation Bar */
+/* ===============================
+   📌 NAVIGATION BAR (Always Visible)
+   =============================== */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(30, 30, 30, 0.8); /* Dark, High Opacity */
-    box-shadow: 0 3px 10px rgba(255, 0, 0, 0.5); /* Subtle Red Glow */
-    padding: 0.6rem 0; /* Reduced Height */
+    background-color: rgba(30, 30, 30, 0.8);
+    box-shadow: 0 3px 10px rgba(255, 0, 0, 0.5);
+    padding: 0.6rem 0;
     display: flex;
     justify-content: center;
     gap: 1.5rem;
@@ -272,12 +150,166 @@ body::before {
 
 /* Hover Effect - Red Glow */
 .nav-link:hover {
-    color: #ff4444; /* Bright Red */
-    text-shadow: 0px 0px 8px rgba(255, 68, 68, 0.8); /* Red Glow */
+    color: #ff4444;
+    text-shadow: 0px 0px 8px rgba(255, 68, 68, 0.8);
 }
 
 /* Active Page Indicator */
 .nav-link.active {
     color: #ff4444;
     text-shadow: 0px 0px 10px rgba(255, 68, 68, 1);
+}
+
+/* ===============================
+   📌 CONTENT WRAPPER (Main Section)
+   =============================== */
+.content-wrapper {
+    position: relative;
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: auto;
+    width: 85%;
+    max-width: 1200px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    text-align: left;
+}
+
+/* ===============================
+   🔥 FLOATING EMBERS EFFECT
+   =============================== */
+   #embers-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through */
+    overflow: hidden;
+    z-index: -1;
+}
+
+.ember {
+    position: absolute;
+    bottom: -10px; /* Start from the bottom */
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255, 100, 0, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 50, 0, 0.8);
+    animation: riseUp linear infinite;
+}
+
+/* Ember Floating Animation */
+@keyframes riseUp {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ===============================
+   ⚽ FIFA-THEMED IMAGE GALLERY
+   =============================== */
+.image-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Player Cards */
+.gallery-image {
+    width: 400px;
+    height: auto;
+    margin: 2.5rem 0;
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out, opacity 0.5s;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* Animated Appearance of Cards */
+.card-animated {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* ===============================
+   🎭 GLITCH OVERLAY & EFFECTS
+   =============================== */
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 9999;
+    display: none;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Glitch Bars */
+.glitch-bar {
+    position: absolute;
+    width: 120%;
+    height: calc(1px + 5vw);
+    background: rgba(255, 0, 0, 0.8);
+    left: -150%;
+    transform: rotate(calc(-5deg + 10deg * random()));
+    animation: glitchBarMove 0.03s linear infinite;
+}
+
+@keyframes glitchBarMove {
+    0% { left: -150%; }
+    100% { left: 150%; }
+}
+
+/* Extreme Randomized Color Flickering */
+.glitch-active {
+    display: block;
+    animation: glitchFlash 0.02s infinite alternate;
+}
+
+@keyframes glitchFlash {
+    0%   { background: rgba(255, 0, 0, 0.7); transform: skewX(5deg); }
+    50%  { background: rgba(255, 255, 255, 0.7); transform: skewX(-5deg); }
+    100% { background: rgba(255, 0, 0, 0.7); transform: skewX(5deg); }
+}
+
+/* ===============================
+   📝 ADDITIONAL TEXT & TYPOGRAPHY
+   =============================== */
+/* Typing Effect */
+.typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    font-weight: 400;
+    display: inline-block;
+}
+
+/* Blinking Cursor */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Flicker Effect for Heading */
+@keyframes flicker {
+    0% { opacity: 1; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+    100% { opacity: 0.8; text-shadow: 0 0 30px rgba(255, 215, 0, 1); }
 }
